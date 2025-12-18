@@ -19,7 +19,7 @@ for(let i = 1; i <= 100; i++){
     //console.log(`sum => ${sum}, i => ${i}`);
   }
 }
-console.log(`최종합계 : ${sum}`);
+console.log(`최종짝수합계 : ${sum}`);
 sum = 0;
 for(let i = 1; i <= 100; i++){
   sum += i;
@@ -27,3 +27,30 @@ for(let i = 1; i <= 100; i++){
 }
 
 console.log(`최종합계 : ${sum}`);
+
+//1부터 100까지 정수중에서 홀수의 합을 sum변수에 누적
+
+sum = 0;
+for(let i = 1; i <= 100; i++){
+  if(i % 2 == 1){
+    sum += i;
+  }
+}
+
+console.log(`최종홀수합계 : ${sum}`);
+
+//1~100 까지 정수중에 홀수의 합 : oddSum, 짝수의 합 : evenSum에 누적
+let oddSum = 0;
+let evenSum = 0;
+
+for(let i = 1; i <= 100; i++){
+  if(i % 2 == 1){
+    oddSum += i;
+  }
+  else{
+    evenSum += i;
+  }
+}
+
+console.log(`최종홀수합계는 ${oddSum}이고 최종짝수합계는 ${evenSum}이다.`)
+
