@@ -51,4 +51,50 @@ scoreInfo(10);
 
 //시작할 때 git pull origin main 하기
 
+//1 ~ 10 까지 정수를 합하는 반복문
+let sum = 0;
+for(i = 1; i <= 10; i++){
+  sum += i;
+}
+console.log(`정수의 합 : ${sum}`);
+//홀수값만 누적
+sum = 0;
+for(i = 1; i <= 10; i++){
+  if(i % 2 == 1){
+    sum += i;
+  }
+}
+console.log(`홀수의 합 : ${sum}`);
+//짝수값만 누적
+sum = 0;
+for(i = 1; i <= 10; i++){
+  if(i % 2 == 0){
+    sum += i;
+  }
+}
+console.log(`짝수의 합 : ${sum}`);
 
+//함수: oddSum()
+function oddSum(){
+    sum = 0;
+  for(i = 1; i <= 10; i++){
+    if(i % 2 == 1){
+      sum += i;
+    }
+  }
+  console.log(`홀수의 합 : ${sum}`);
+}
+oddSum();
+
+//함수 : sumUp() / 1 ~ 5까지의 합. 반환
+//결과값을 result 변수에 저장
+
+function sumUp(a){
+  let result = 0;
+  for(i = 1; i <= a; i++){
+    result += i;
+  }
+  console.log(`정수의 합 : ${result}`);
+  return result;
+}
+let result = sumUp(5);
