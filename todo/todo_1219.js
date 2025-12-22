@@ -13,22 +13,42 @@
 //테이블태그를 활용해서 화면에 document.write()표만들기
 
 let friends = [
-  {name: "홍길동", phone:"010-1111-1111", birthday:"08-12-12",stature:163.5},
-  {name: "김길동", phone:"010-2222-2222", birthday:"09-11-13",stature:170.4},
-  {name: "박길동", phone:"010-2222-2222", birthday:"09-11-13",stature:172.8},
-  {name: "금길동", phone:"010-2222-2222", birthday:"09-11-13",stature:162.1},
-]
+  {
+    name: "홍길동",
+    phone: "010-1111-1111",
+    birthday: "08-12-12",
+    stature: 163.5,
+  },
+  {
+    name: "김길동",
+    phone: "010-2222-2222",
+    birthday: "09-11-13",
+    stature: 170.4,
+  },
+  {
+    name: "박길동",
+    phone: "010-3333-3333",
+    birthday: "09-11-13",
+    stature: 172.8,
+  },
+  {
+    name: "금길동",
+    phone: "010-4444-4444",
+    birthday: "09-11-13",
+    stature: 162.1,
+  },
+];
 let sta = 0;
 let average = 0;
-let topstature=0;
+let topstature = 0;
 let id = 0;
-for(let i = 0; i< friends.length;i++){
+for (let i = 0; i < friends.length; i++) {
   sta += friends[i].stature;
-  if(topstature< friends[i].stature){
+  if (topstature < friends[i].stature) {
     topstature = friends[i].stature;
     id = friends[i].name;
   }
-};
+}
 average = sta / friends.length;
 console.log(`친구평균키: ${average}, 가장큰키: ${topstature}(${id})`);
 
@@ -42,7 +62,7 @@ htmlStr += `<th> 이름 </th>
 htmlStr += `</tr>
 </thead>
 <tbody>`;
-for(let friend of friends){
+for (let friend of friends) {
   htmlStr += `<tr>
   <td>${friend.name}</td>
   <td>${friend.phone}</td>
