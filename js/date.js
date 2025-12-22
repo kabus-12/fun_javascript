@@ -78,8 +78,10 @@ function printCalendar(yyyy, mm) {
   today.setFullYear(yyyy);
   today.setMonth(mm);
   today.setDate(0);
-  const spaces = today.getDay();
   const lastDate = today.getDate();
+  today.setMonth(mm - 1);
+  today.setDate(1);
+  const spaces = today.getDay();
 
   //배열
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -102,7 +104,7 @@ function printCalendar(yyyy, mm) {
   htmlStr += `</tr></tbody></table>`;
   document.writeln(htmlStr);
 }
-printCalendar(2025, 5);
+printCalendar(2025, 2);
 // 객체, 메소드 =>
 function printDay(now = new Date()) {
   //콘솔에 요일정보를 출력하는 함수
