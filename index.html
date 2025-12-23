@@ -8,6 +8,9 @@
       h3 {
         color: red;
       }
+      /* #calendar {
+        display: none;
+      } */
     </style>
   </head>
 
@@ -19,7 +22,11 @@
       <li>돼지고기</li>
       <li>회</li>
     </ul>
+    년도:<input type="number" id="yyyy" value="2025" /><br />
+    월:<input type="number" id="mm" value="12" max="12" />
+    <button id="back">←</button><button id="cal">달력 출력</button><button id ="go">→</button>
+    <div id="calendar" style.display:"none"></div>
+
     <script src="js/date.js"></script>
-    <button>이벤트</button>
   </body>
 </html>

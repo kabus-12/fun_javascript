@@ -85,7 +85,7 @@ function printCalendar(yyyy, mm) {
 
   //배열
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  let htmlStr = `<h2>${yyyy}년 ${mm}월</h2><table border = "2"><thead><tr>`;
+  let htmlStr = `<table border = "2"><caption>${yyyy}년 ${mm}월</caption><thead><tr>`;
   for (let day of days) {
     htmlStr += `<th>${day}</th>`;
   }
@@ -102,9 +102,49 @@ function printCalendar(yyyy, mm) {
     }
   }
   htmlStr += `</tr></tbody></table>`;
-  document.writeln(htmlStr);
+  document.querySelector("#calendar").innerHTML = htmlStr;
 }
-printCalendar(2025, 2);
+
+document.querySelector("#cal").addEventListener("click", (e) => {
+  console.log(e);
+  document.querySelector("#calendar").style.display = "block";
+  let yyyy = document.querySelector("#yyyy").value;
+  console.log(yyyy);
+  let mm = document.querySelector("#mm").value;
+  console.log(mm);
+  printCalendar(yyyy, mm);
+});
+document.querySelector("#back").addEventListener("click", (e) => {
+  let yyyy = document.querySelector("#yyyy").value;
+  let mm = document.querySelector("#mm").value;
+  if (mm > 1) {
+    mm--;
+    document.querySelector("#mm").value = mm;
+  } else {
+    yyyy--;
+    document.querySelector("#yyyy").value = yyyy;
+    mm = 12;
+    document.querySelector("#mm").value = mm;
+  }
+  console.log(mm);
+  printCalendar(yyyy, mm);
+});
+document.querySelector("#go").addEventListener("click", (e) => {
+  let yyyy = document.querySelector("#yyyy").value;
+  let mm = document.querySelector("#mm").value++;
+  if (mm < 12) {
+    mm++;
+    document.querySelector("#mm").value = mm;
+  } else {
+    yyyy++;
+    document.querySelector("#yyyy").value = yyyy;
+    mm = 1;
+    document.querySelector("#mm").value = mm;
+  }
+  console.log(mm);
+  printCalendar(yyyy, mm);
+});
+
 // 객체, 메소드 =>
 function printDay(now = new Date()) {
   //콘솔에 요일정보를 출력하는 함수
