@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index.html</title>
+    <style>
+      h3 {
+        color: red;
+      }
+      /* #calendar {
+        display: none;
+      } */
+    </style>
+  </head>
+
+  <body>
+    <h3>자바스크립트 연습</h3>
+    <ul id="second">
+      내가 좋아하는 음식(안형주).
+      <li>초밥</li>
+      <li>돼지고기</li>
+      <li>회</li>
+    </ul>
+    년도:<input type="number" id="yyyy" value="2025" /><br />
+    월:<input type="number" id="mm" value="12" max="12" />
+    <button id="back">←</button><button id="cal">달력 출력</button><button id ="go">→</button>
+    <div id="calendar" style.display:"none"></div>
+
+    <script src="js/date.js"></script>
+  </body>
+</html>

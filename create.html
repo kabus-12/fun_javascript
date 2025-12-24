@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Programming</title>
+    <link rel="stylesheet" href="css/subject.css" />
+    <style>
+      .cancel {
+        text-decoration: line-through;
+        color: rgb(202, 202, 202);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Web Programming</h1>
+      <p>공부할 주제를 기록해 보세요</p>
+      <form name="addForm" action="#">
+        <label for="subject" class="hidden">주제</label>
+        <input type="text" id="subject" autofocus />
+        <button type="submit">추가</button>
+      </form>
+      <hr />
+      <ul id="itemList">
+        <!-- <li class = "cancel">HTML<button>삭제</button></li> -->
+      </ul>
+      <script>
+        //form에 submit 이벤트를 등록
+        //이벤트 전파 차단(e.stopPropagation())
+        //상위 -> 하위 : 캡처링, 하위 -> 상위 : 버블링
+        document
+          .querySelector('form[name="addForm"]')
+          .addEventListener("submit", (e) => {
+            e.preventDefault(); //submit 차단 (기본기능 차단)
+            let title = document.querySelector("#subject").value; //입력값
+            //입력값 체크
+            if (!title) {
+              //! 공백이나 값이 없다는 뜻
+              alert("값을 입력하세요");
+              return; //반환하고 종료하겠다(함수 안에서만)
+            }
+            let liTag = document.createElement("li"); // <li></li>
+            liTag.innerText = title;
+            liTag.addEventListener(
+              "click",
+              (e) => {
+                console.log(e.target.tagName); // "BUTTON", "LI"
+                let target = e.target;
+                if (e.target.tagName == "BUTTON") {
+                  target = e.target.parentElement;
+                }
+                e.stopPropagation(); //이벤트전파 차단
+                target.classList.toggle("cancel"); //toggle => 없으면 만들고 있으면 제거하란뜻
+                // if (e.target.classList.contains("cancel")) {
+                //   //contains = 안에 이것이 있냐고 물어보는 함수
+                //   e.target.classList.remove("cancel");
+                // } else {
+                //   e.target.classList.add("cancel");
+                // }
+                // //e.target.className = "cancel"; //<li class = "cancal light standard"></li> 클래스를 여러개 넣겠다라는 의미
+                // console.log(e.target.classList);
+              },
+              true
+            );
+            //<button>삭제</button>
+            let delBtn = document.createElement("button");
+            delBtn.innerText = "삭제";
+            liTag.appendChild(delBtn);
+            delBtn.addEventListener(
+              "click",
+              (e) => {
+                e.target.parentElement.remove(); //parentElement(상위객체까지)
+              },
+              true
+            );
+            // ul선택
+            document.querySelector("#itemList").appendChild(liTag);
+            //초기화
+            document.querySelector("#subject").value = "";
+            document.querySelector("#subject").focus();
+          });
+      </script>
+    </div>
+  </body>
+</html>
