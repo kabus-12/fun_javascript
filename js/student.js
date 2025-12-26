@@ -7,7 +7,7 @@ let students = [
 //기존의 tbody의 html삭제
 const target = document.querySelector("div.list tbody");
 target.innerHTML = "";
-
+target.in;
 makeList();
 
 //////////////////// 이벤트 //////////////////////////
