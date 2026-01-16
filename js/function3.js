@@ -7,26 +7,15 @@ let page = 1; //현재페이지
 
 //함수(member => tr>td:(ID),td(FirstName),td(LastName),td(salary))
 function makeTr(member) {
-  console.log(member);
   const trStr = `<tr>
-     <td>${member.id}</td>
+     <td id = id>${member.id}</td>
      <td>${member.first_name}</td>
      <td>${member.last_name}</td>
      <td>${member.gender}</td>
      <td>${member.salary}</td>
+     <td><button onclick=deletebtn(${member.id}) class="btn btn-danger">삭제</button></td>
      </tr>`;
   return trStr;
-  // const fields = ["id", "first_name", "last_name", "gender", "salary"];
-  // for (let field of fields) {
-  //   console.log(field);
-  //   const trStr = `<tr>
-  //   <td>${member.field}</td>
-  //   <td>${member.field}</td>
-  //   <td>${member.field}</td>
-  //   <td>${member.field}</td>
-  //   <td>${member.field}</td>
-  //   </tr>`;
-  // }
 
   // const trTag = document.createElement("tr"); //tr태그 생성 <tr></tr>
   // // td*4생성
@@ -111,6 +100,16 @@ function generatePagingList() {
 } //end of generatePagingList()
 generatePagingList();
 
+function deletebtn(e) {
+  console.log(e);
+  for (let i in ary1) {
+    if (e == ary1[i].id) {
+      ary1.splice(i, 1);
+    }
+  }
+  showPageList();
+}
+
 ///////////////이벤트/////////////////
 document.querySelector("ul.pagination").addEventListener("click", (e) => {
   //클릭되는 대상 파악하기
@@ -123,7 +122,5 @@ document.querySelector("ul.pagination").addEventListener("click", (e) => {
     showPageList(selectPage);
   }
 });
-document.querySelector(".btn-danger").addEventListener("click", (e) => {
-  console.log(e);
-});
+
 //////////////////////////////////////
