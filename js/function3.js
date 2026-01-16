@@ -7,19 +7,39 @@ let page = 1; //현재페이지
 
 //함수(member => tr>td:(ID),td(FirstName),td(LastName),td(salary))
 function makeTr(member) {
-  const fields = ["id", "first_name", "last_name", "gender", "salary"];
-  const trTag = document.createElement("tr"); //tr태그 생성 <tr></tr>
-  // td*4생성
-  for (let field of fields) {
-    tdTag = document.createElement("td"); //td태그 생성 <td></td>
-    tdTag.innerText = member[field]; //member.field도 가능
-    trTag.appendChild(tdTag);
-  }
-  const btn = document.createElement("button");
-  btn.className = "btn btn-danger";
-  btn.innerText = "삭제";
-  trTag.appendChild(btn);
-  return trTag;
+  console.log(member);
+  const trStr = `<tr>
+     <td>${member.id}</td>
+     <td>${member.first_name}</td>
+     <td>${member.last_name}</td>
+     <td>${member.gender}</td>
+     <td>${member.salary}</td>
+     </tr>`;
+  return trStr;
+  // const fields = ["id", "first_name", "last_name", "gender", "salary"];
+  // for (let field of fields) {
+  //   console.log(field);
+  //   const trStr = `<tr>
+  //   <td>${member.field}</td>
+  //   <td>${member.field}</td>
+  //   <td>${member.field}</td>
+  //   <td>${member.field}</td>
+  //   <td>${member.field}</td>
+  //   </tr>`;
+  // }
+
+  // const trTag = document.createElement("tr"); //tr태그 생성 <tr></tr>
+  // // td*4생성
+  // for (let field of fields) {
+  //   tdTag = document.createElement("td"); //td태그 생성 <td></td>
+  //   tdTag.innerText = member[field]; //member.field도 가능
+  //   trTag.appendChild(tdTag);
+  // }
+  // const btn = document.createElement("button");
+  // btn.className = "btn btn-danger";
+  // btn.innerText = "삭제";
+  // trTag.appendChild(btn);
+  // return trTag;
 }
 
 //멤버 수만큼 tr생성
@@ -39,7 +59,8 @@ function showPageList(pg = 1) {
   //배열의 건수만큼 화면에 출력
   for (let elem of pageAry) {
     const newTr = makeTr(elem);
-    target.appendChild(newTr);
+
+    target.innerHTML += newTr;
   }
 } //end of showPageList
 
@@ -63,64 +84,30 @@ function generatePagingList() {
   startPage = endPage - 9;
   endPage = endPage > realEnd ? realEnd : endPage; //실제마지막페이지보다 작음
   prev = startPage == 1 ? false : true; //이전, 이후 페이지 계산
-  next = endPage < realEnd ? true : false;
+  next = endPage < realEnd ? true : false; // realEnd가 토탈컷(100)/pageSize(5) =20이니깐 endPage(끝페이지 20)이면 비활성화!
   //1~10반복하면서
 
   //<1.previous>생성
-  const liTag = document.createElement("li");
-  liTag.className = "page-item";
-  const aTag = document.createElement("a");
-  aTag.className = "page-link";
-  aTag.setAttribute("href", "#");
-  aTag.innerText = "Previous";
-  aTag.setAttribute("data-page", startPage - 1);
-  if (prev) {
-    //class에 href를 추가
-    aTag.setAttribute("href", "#");
-  } else {
-    //class에 disabled추가
-    liTag.classList.add("disabled");
-  }
-  liTag.appendChild(aTag);
-  ulPagination.appendChild(liTag);
+  const prevStr = `<li class="page-item ${prev ? "" : "disabled"}">
+        <a class="page-link" data-page="${startPage - 1}">Previous</a>
+      </li>`;
+  ulPagination.insertAdjacentHTML("beforeend", prevStr);
 
   //<2.페이지 수만큼 출력>
   for (let p = startPage; p <= endPage; p++) {
     //prev
-    const liTag = document.createElement("li");
-    liTag.className = "page-item";
-    const aTag = document.createElement("a");
-    aTag.className = "page-link";
-    aTag.setAttribute("href", "#");
-    aTag.innerText = p;
-    aTag.setAttribute("data-page", p);
-
-    // 현재 페이지에 선택
-    if (p == page) {
-      liTag.classList.add("active");
-      liTag.setAttribute("aria-current", "#");
-    }
-    //부모자식
-    liTag.appendChild(aTag);
-    ulPagination.appendChild(liTag);
+    const pageStr = `<li class="page-item ${p == page ? "active" : ""}"
+                      aria-current=${p == page ? "page" : ""}
+                      >
+                      <a class="page-link" href="#" data-page=${p}>${p}</a>
+                    </li>`;
+    ulPagination.insertAdjacentHTML("beforeend", pageStr);
   }
   //<3.next 생성>
-  const nliTag = document.createElement("li");
-  nliTag.className = "page-item";
-  const naTag = document.createElement("a");
-  naTag.className = "page-link";
-  naTag.setAttribute("href", "#");
-  naTag.innerText = "next";
-  naTag.setAttribute("data-page", endPage + 1);
-  if (next) {
-    //class에 href를 추가
-    naTag.setAttribute("href", "#");
-  } else {
-    //class에 next추가
-    nliTag.classList.add("next");
-  }
-  nliTag.appendChild(naTag);
-  ulPagination.appendChild(nliTag);
+  const nextStr = `<li class="page-item ${next ? "" : "disabled"}">
+        <a class="page-link" href="#" data-page = ${endPage + 1}>Next</a>
+      </li>`;
+  ulPagination.insertAdjacentHTML("beforeend", nextStr);
 } //end of generatePagingList()
 generatePagingList();
 
@@ -136,5 +123,7 @@ document.querySelector("ul.pagination").addEventListener("click", (e) => {
     showPageList(selectPage);
   }
 });
-
+document.querySelector(".btn-danger").addEventListener("click", (e) => {
+  console.log(e);
+});
 //////////////////////////////////////
