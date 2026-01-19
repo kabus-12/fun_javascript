@@ -20,10 +20,29 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <style>
+      div.container {
+        width: 500px;
+        height: 400px;
+        background-color: yellow;
+      }
+      div.container > span {
+        display: inline-block;
+        width: 110px;
+        background-color: aquamarine;
+        margin: 5px;
+        padding: 2px;
+      }
+    </style>
   </head>
   <body>
     <h3>자바스크립트2</h3>
     <ul></ul>
-    <script src="js/literal.js"></script>
+    입력: <input type="text" id="user_input" />
+    <button class="btn btn-secondary">찾기</button>
+    <div class="container">
+      <ul id="list"></ul>
+    </div>
+    <script src="js/Array2.js"></script>
   </body>
 </html>
